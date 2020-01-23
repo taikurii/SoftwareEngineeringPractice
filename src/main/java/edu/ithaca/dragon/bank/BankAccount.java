@@ -36,11 +36,19 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        if (email.indexOf('@') == -1 || email.indexOf('#') != -1 || ) {
             return false;
         }
-        else {
-            return true;
+        else if (email.indexOf('-') !){
+            String x = "";
+            String y = "";
+            for (int i = 0; i < email.length(); i++){
+                if ((x == "-" && y == "-") || (x == "." && y == ".") || (x == "_" && y == "_")){
+                    return false;
+                }
+            }
+
         }
     }
 }
+
