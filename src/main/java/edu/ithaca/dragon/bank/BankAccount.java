@@ -30,11 +30,11 @@ public class BankAccount {
      * @throws IllegalArgumentException if amount is negative or larger than balance
      */
     public void withdraw(double amount) {
-        if (amount <= balance) {
-            balance -= amount;
+        if (amount > balance || amount < 0) {
+            throw new IllegalArgumentException("invalid amount, please try again");
         }
         else {
-            throw new IllegalArgumentException("invalid amount, please try again");
+            balance -= amount;
         }
 
     }
@@ -44,19 +44,13 @@ public class BankAccount {
             return false;
         } else if (email.charAt(email.indexOf('@') - 1) == '-' || email.charAt(email.indexOf('@') - 1) == '.' || email.charAt(email.indexOf('@') - 1) == '_') {
             return false;
-        } else if (email.indexOf('-') != -1 || email.indexOf('.') != -1 || email.indexOf('_') != -1) {
-            return false;
         } if (email.indexOf('-') != -1 || email.indexOf('.') != -1 || email.indexOf('_') != -1) {
-            String x = "";
-            String y = "";
-            for (int i = 0; i < email.length(); i++) {
-                if ((x == "-" && y == "-") || (x == "." && y == ".") || (x == "_" && y == "_")) {
-                    return false;
-                } else if ((x == "-" && y == "_") || (x == "-" && y == ".") || (x == "." && y == "-") || (x == "." && y == "_")) {
-                    return false;
-                } else if ((x == "_" && y == "-") || (x == "_" && y == ".")) {
-                    return false;
-                }
+            if (email.charAt(email.indexOf('-') + 1) == '-' || email.charAt(email.indexOf('-') + 1) == '.' || email.charAt(email.indexOf('-') + 1) == '_') {
+                return false;
+            } else if (email.charAt(email.indexOf('.') + 1) == '-' || email.charAt(email.indexOf('.') + 1) == '.' || email.charAt(email.indexOf('.') + 1) == '_') {
+                return false;
+            } else if (email.charAt(email.indexOf('_') + 1) == '-' || email.charAt(email.indexOf('_') + 1) == '.' || email.charAt(email.indexOf('_') + 1) == '_') {
+                return false;
             }
         }
         return true;
