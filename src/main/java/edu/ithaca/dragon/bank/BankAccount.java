@@ -28,6 +28,7 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * @throws IllegalArgumentException if amount is negative or larger than balance
      */
     public void withdraw (double amount)  {
         balance -= amount;
@@ -36,10 +37,10 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1 || email.indexOf('#') != -1 || ) {
+        if (email.indexOf('@') == -1 || email.indexOf('#') != -1) {
             return false;
         }
-        else if (email.indexOf('-') !){
+        /*else if (email.indexOf('-') !){
             String x = "";
             String y = "";
             for (int i = 0; i < email.length(); i++){
@@ -48,7 +49,8 @@ public class BankAccount {
                 }
             }
 
-        }
+        }*/
+        return true;
     }
 }
 
