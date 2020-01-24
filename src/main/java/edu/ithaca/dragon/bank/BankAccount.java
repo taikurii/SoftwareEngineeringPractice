@@ -27,6 +27,7 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * @throws IllegalArgumentException if amount is negative or larger than balance
      */
     public void withdraw(double amount) {
         balance -= amount;
@@ -34,12 +35,20 @@ public class BankAccount {
     }
 
 
+<<<<<<< HEAD
     public static boolean isEmailValid(String email) {
         if (email.indexOf('@') == -1 || email.indexOf('#') != -1 || email.indexOf('!') != -1) {
             return false;
         } else if (email.charAt(email.indexOf('@') - 1) == '-' || email.charAt(email.indexOf('@') - 1) == '.' || email.charAt(email.indexOf('@') - 1) == '_') {
             return false;
         } else if (email.indexOf('-') != -1 || email.indexOf('.') != -1 || email.indexOf('_') != -1) {
+=======
+    public static boolean isEmailValid(String email){
+        if (email.indexOf('@') == -1 || email.indexOf('#') != -1) {
+            return false;
+        }
+        /*else if (email.indexOf('-') !){
+>>>>>>> c46f17431bfe822407e33888e1ad890f8f8f35f3
             String x = "";
             String y = "";
             for (int i = 0; i < email.length(); i++) {
@@ -51,11 +60,17 @@ public class BankAccount {
                     return false;
                 }
             }
+<<<<<<< HEAD
         }
         else if(email.charAt(0) == '.' || email.charAt(0) == '_' || email.charAt(0) == '-') {
             return false;
         }
 
+=======
+
+        }*/
+        return true;
+>>>>>>> c46f17431bfe822407e33888e1ad890f8f8f35f3
     }
 }
 
