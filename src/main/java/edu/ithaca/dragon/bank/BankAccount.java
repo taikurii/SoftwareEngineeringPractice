@@ -51,6 +51,12 @@ public class BankAccount {
                 return false;
             } else if (email.charAt(email.indexOf('_') + 1) == '-' || email.charAt(email.indexOf('_') + 1) == '.' || email.charAt(email.indexOf('_') + 1) == '_') {
                 return false;
+            } else if(email.charAt(email.indexOf('@') + 1) == '@') {
+                return false;
+            } else if(email.substring(email.lastIndexOf('.')+1).length() < 2) {
+                return false;
+            } else if(email.indexOf('.', email.indexOf('@')) == -1) {
+                return false;
             }
         }
         return true;

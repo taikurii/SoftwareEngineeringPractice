@@ -28,6 +28,9 @@ class BankAccountTest {
         BankAccount bankAccount3 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount3.withdraw(-50));
 
+        BankAccount bankAccount4 = new BankAccount("a@b.com", 200);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-1));
+
         //border cases not present might be -1, 0, 200, 201 (given that balance is 200)
 
     }
