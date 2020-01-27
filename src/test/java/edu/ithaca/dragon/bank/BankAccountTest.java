@@ -39,12 +39,15 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
         //invalid entry, no email
         assertFalse( BankAccount.isEmailValid(""));
+        assertFalse(BankAccount.isEmailValid("a@@b.com"));
         //invalid entry, hyphen before @
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
         //invalid entry, two periods next to each other
         assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
         //invalid entry, # present
         assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
+        assertFalse(BankAccount.isEmailValid("abc##def@mail.com"));
+        assertFalse(BankAccount.isEmailValid(".abc@mail.com"));
         //invalid entry, # present
         assertFalse(BankAccount.isEmailValid("abc.def@mail#archive.com"));
         //valid entry
@@ -55,6 +58,10 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid("abc_def@mail.com"));
         //valid entry, border case because 2 characters after suffix "."
         assertTrue(BankAccount.isEmailValid("abc.def@mail.cc"));
+        //equivalence class - invalid email(valid prefix, invalid suffix) - border case
+        assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
+        //equivalence class - invalid email(valid prefix, invalid suffix) - not a border case
+        assertFalse(BankAccount.isEmailValid("abc.def@mail"));
 
         //anything with a ".", "_", or "-" could technically be considered a border case because just one character
         // away from a double special character, but given that a suffix must have a ".", wouldn't they all be
