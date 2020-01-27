@@ -15,23 +15,41 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() {
-        //valid entry (less than balance) equivalence class, not a a border case
+        //equivalence class - valid entry (not a a border case)
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance());
 
-        //invalid entry (greater than balance) equivalence class, not a border case
+        //equivalence class - greater than balance (not a border case)
         BankAccount bankAccount2 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount2.withdraw(300));
 
-        //equivalence class, invalid entry (negative amount), not a border case
+        //equivalence class - negative amount (not a border case)
         BankAccount bankAccount3 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount3.withdraw(-50));
 
+        //equivalence class - negative amount (border case)
         BankAccount bankAccount4 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-1));
 
-        //border cases not present might be -1, 0, 200, 201 (given that balance is 200)
+        //equivalence class - greater than balance (border case)
+        BankAccount bankAccount5 = new BankAccount("a@b.com", 200);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount5.withdraw(201));
+
+        //equivalence class - valid entry (border case)
+        BankAccount bankAccount6 = new BankAccount("a@b", 200);
+        bankAccount6.withdraw(0);
+        assertEquals(200, bankAccount6.getBalance());
+
+        //equivalence class - valid entry (border case)
+        BankAccount bankAccount7 = new BankAccount("a@b", 200);
+        bankAccount7.withdraw(200);
+        assertEquals(0, bankAccount7.getBalance());
+
+        //equivalence class - valid entry (border case)
+        BankAccount bankAccount8 = new BankAccount("a@b", 200);
+        bankAccount8.withdraw(199);
+        assertEquals(1, bankAccount8.getBalance());
 
     }
 
