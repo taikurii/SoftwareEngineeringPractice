@@ -15,12 +15,12 @@ class BankAccountTest {
 
     @Test
     void withdrawTest() {
-        //equivalence class, valid entry (less than balance), not a a border case
+        //valid entry (less than balance) equivalence class, not a a border case
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
         assertEquals(100, bankAccount.getBalance());
 
-        //equivalence class, invalid entry (greater than balance), not a border case
+        //invalid entry (greater than balance) equivalence class, not a border case
         BankAccount bankAccount2 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount2.withdraw(300));
 
@@ -34,22 +34,23 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
-        //all equivalence class
-        //valid entry
+        //all are equivalence classes
+        //valid entry equivalence class
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
-        //invalid entry, no email
+        //invalid entry
         assertFalse( BankAccount.isEmailValid(""));
+        //invalid entry, one '@' equivalence class, border case
         assertFalse(BankAccount.isEmailValid("a@@b.com"));
-        //invalid entry, hyphen before @
+        //invalid entry, valid symbol (hyphen) before '@' equivalence class, border case
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
-        //invalid entry, two periods next to each other
+        //invalid entry, more than one consecutive valid symbol (period) equivalence class, border case
         assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
-        //invalid entry, # present
+        //invalid entry, invalid symbol equivalence class, border case
         assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
+        //invalid entry, invalid symbol equivalence class, not a border case
         assertFalse(BankAccount.isEmailValid("abc##def@mail.com"));
+        //invalid entry, valid (period) symbol but at start of email equivalence class, border case
         assertFalse(BankAccount.isEmailValid(".abc@mail.com"));
-        //invalid entry, # present
-        assertFalse(BankAccount.isEmailValid("abc.def@mail#archive.com"));
         //valid entry
         assertTrue(BankAccount.isEmailValid("abc-d@mail.com"));
         //valid entry
@@ -58,9 +59,9 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid("abc_def@mail.com"));
         //valid entry, border case because 2 characters after suffix "."
         assertTrue(BankAccount.isEmailValid("abc.def@mail.cc"));
-        //equivalence class - invalid email(valid prefix, invalid suffix) - border case
+        //invalid entry, one letter after domain '.' equivalence class, border case
         assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
-        //equivalence class - invalid email(valid prefix, invalid suffix) - not a border case
+        //invalid entry, one letter after domain '.' equivalence class, border case
         assertFalse(BankAccount.isEmailValid("abc.def@mail"));
 
         //anything with a ".", "_", or "-" could technically be considered a border case because just one character
