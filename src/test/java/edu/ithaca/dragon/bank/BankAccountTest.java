@@ -9,7 +9,6 @@ class BankAccountTest {
     @Test
     void getBalanceTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
-
         assertEquals(200, bankAccount.getBalance());
     }
 
@@ -23,23 +22,28 @@ class BankAccountTest {
         //equivalence class - greater than balance (not a border case)
         BankAccount bankAccount2 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount2.withdraw(300));
+        assertEquals(200, bankAccount2.getBalance());
 
         //equivalence class - negative amount (not a border case)
         BankAccount bankAccount3 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount3.withdraw(-50));
+        assertEquals(200, bankAccount3.getBalance());
 
         //equivalence class - negative amount (border case)
         BankAccount bankAccount4 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount4.withdraw(-1));
+        assertEquals(200, bankAccount4.getBalance());
 
         //equivalence class - greater than balance (border case)
         BankAccount bankAccount5 = new BankAccount("a@b.com", 200);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount5.withdraw(201));
+        assertEquals(200, bankAccount5.getBalance());
 
         //equivalence class - valid entry (border case)
         BankAccount bankAccount6 = new BankAccount("a@b", 200);
         bankAccount6.withdraw(0);
         assertEquals(200, bankAccount6.getBalance());
+
 
         //equivalence class - valid entry (border case)
         BankAccount bankAccount7 = new BankAccount("a@b", 200);
