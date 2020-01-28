@@ -96,6 +96,16 @@ class BankAccountTest {
     }
 
     @Test
+    void isAmountValidTest() {
+        //equivalence class - valid amount (border case)
+        assertTrue(BankAccount.isAmountValid(0.01));
+        //equivalence class - valid amount (not border case)
+        assertTrue(BankAccount.isAmountValid(100));
+
+
+    }
+
+    @Test
     void constructorTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
 
