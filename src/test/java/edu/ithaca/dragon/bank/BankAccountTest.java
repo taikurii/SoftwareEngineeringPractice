@@ -101,6 +101,8 @@ class BankAccountTest {
         assertTrue(BankAccount.isAmountValid(0.01));
         //equivalence class - valid amount (middle case)
         assertTrue(BankAccount.isAmountValid(100));
+        //equivalence class - decimal places
+        assertTrue(BankAccount.isAmountValid(1.1));
         //equivalence class - zero amount
         assertFalse(BankAccount.isAmountValid(0));
         //equivalence class - negative amount(border case)

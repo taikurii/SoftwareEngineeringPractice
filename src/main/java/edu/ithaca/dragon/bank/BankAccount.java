@@ -66,9 +66,18 @@ public class BankAccount {
      * @return true if amount is positive and has two or less decimal places, and false otherwise
      */
     public static boolean isAmountValid(double amount) {
-        return false;
+        if(amount <= 0) {
+            return false;
+        }
+        double rounded = java.lang.Math.round(amount*100)/100D;
+        System.out.println(amount + " " + rounded);
+        if(rounded == amount) {
+         return true;
+        }
+        else {
+            return false;
+        }
     }
-
-    }
+}
 
 
