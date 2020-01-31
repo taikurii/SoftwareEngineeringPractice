@@ -102,9 +102,70 @@ class BankAccountTest {
         BankAccount bankAccount7 = new BankAccount("a@b.com", 100);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount7.deposit(-0.111));
         assertEquals(100, bankAccount7.getBalance());
+    }
 
+    @Test
+    void transferTest() {
+        BankAccount accFrom1 = new BankAccount("a@b.com", 100);
+        BankAccount accTo1 = new BankAccount("a@b.com", 100);
+        BankAccount.transfer(100, accFrom1, accTo1);
+        assertEquals(0, accFrom1.getBalance());
+        assertEquals(200, accTo1.getBalance());
 
+        BankAccount accFrom2 = new BankAccount("a@b.com", 100);
+        BankAccount accTo2 = new BankAccount("a@b.com", 100);
+        BankAccount.transfer(.01, accFrom2, accTo2);
+        assertEquals(0, accFrom2.getBalance());
+        assertEquals(200, accTo2.getBalance());
 
+        //equivalence class - amount greater than accFrom balance (border case)
+        BankAccount accFrom3 = new BankAccount("a@b.com", 100);
+        BankAccount accTo3 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(101, accFrom3, accTo3));
+        assertEquals(100, accFrom3.getBalance());
+        assertEquals(100, accTo3.getBalance());
+
+        //equivalence class - amount greater than accFrom balance (middle case)
+        BankAccount accFrom4 = new BankAccount("a@b.com", 100);
+        BankAccount accTo4 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(500, accFrom4, accTo4));
+        assertEquals(100, accFrom4.getBalance());
+        assertEquals(100, accTo4.getBalance());
+
+        //equivalence class - negative amount (border case)
+        BankAccount accFrom5 = new BankAccount("a@b.com", 100);
+        BankAccount accTo5 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(-.01, accFrom5, accTo5));
+        assertEquals(100, accFrom5.getBalance());
+        assertEquals(100, accTo5.getBalance());
+
+        //equivalence class - negative amount (middle case)
+        BankAccount accFrom6 = new BankAccount("a@b.com", 100);
+        BankAccount accTo6 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(-100, accFrom6, accTo6));
+        assertEquals(100, accFrom6.getBalance());
+        assertEquals(100, accTo6.getBalance());
+
+        //equivalence class - more than two decimal cases (border case)
+        BankAccount accFrom7 = new BankAccount("a@b.com", 100);
+        BankAccount accTo7 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(1.111, accFrom7, accTo7));
+        assertEquals(100, accFrom7.getBalance());
+        assertEquals(100, accTo7.getBalance());
+
+        //equivalence class - more than two decimal cases (middle case)
+        BankAccount accFrom8 = new BankAccount("a@b.com", 100);
+        BankAccount accTo8 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(.999999, accFrom8, accTo8));
+        assertEquals(100, accFrom8.getBalance());
+        assertEquals(100, accTo8.getBalance());
+
+        //equivalence class - negative and more than two decimal cases
+        BankAccount accFrom9 = new BankAccount("a@b.com", 100);
+        BankAccount accTo9 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> BankAccount.transfer(1.111, accFrom9, accTo9));
+        assertEquals(100, accFrom9.getBalance());
+        assertEquals(100, accTo9.getBalance());
     }
 
     @Test

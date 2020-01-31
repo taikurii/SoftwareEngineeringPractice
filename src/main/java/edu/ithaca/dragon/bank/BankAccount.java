@@ -83,6 +83,14 @@ public class BankAccount {
     }
 
     /**
+     * @post withdraws amount from accountFrom and deposits it into accountTo if amount is valid (negative or more than two decimal places)
+     * @throws IllegalArgumentException is amount is larger than accountFrom's balance or invalid
+     */
+    public static void transfer(double amount, BankAccount accountFrom, BankAccount accountTo) {
+
+    }
+
+    /**
      * @return true if amount is positive and has two or less decimal places, and false otherwise
      */
     public static boolean isAmountValid(double amount) {
