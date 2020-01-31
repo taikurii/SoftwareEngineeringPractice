@@ -63,8 +63,48 @@ class BankAccountTest {
     }
 
     @Test
+    void depositTest() {
+        //equivalence class - valid amount (border case)
+        BankAccount bankAccount1 = new BankAccount("a@b.com", 100);
+        bankAccount1.deposit(.01);
+        assertEquals(100.01, bankAccount1.getBalance());
+
+        //equivalence class - valid amount (middle case)
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 100);
+        bankAccount2.deposit(100);
+        assertEquals(200, bankAccount2.getBalance());
+
+        //equivalence class - negative amount (border case)
+        BankAccount bankAccount3 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount3.deposit(-.01));
+        assertEquals(100, bankAccount3.getBalance());
+
+        //equivalence class - negative amount (middle case)
+        BankAccount bankAccount4 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount4.deposit(-100));
+        assertEquals(100, bankAccount4.getBalance());
+
+        //equivalence class - more than two decimal places (border case)
+        BankAccount bankAccount5 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount5.deposit(1.111));
+        assertEquals(100, bankAccount5.getBalance());
+
+        //equivalence class - more than two decimal places (middle case)
+        BankAccount bankAccount6 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount6.deposit(.9999999));
+        assertEquals(100, bankAccount6.getBalance());
+
+        //equivalence class - more than two decimal places and negative
+        BankAccount bankAccount7 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount7.deposit(-0.111));
+        assertEquals(100, bankAccount7.getBalance());
+
+
+
+    }
+
+    @Test
     void isEmailValidTest(){
-        //all are equivalence classes
         //valid entry equivalence class
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
         //invalid entry
