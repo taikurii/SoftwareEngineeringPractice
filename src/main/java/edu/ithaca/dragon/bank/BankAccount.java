@@ -51,7 +51,12 @@ public class BankAccount {
      * @throws IllegalArgumentException if amount is invalid
      */
     public void deposit(double amount) {
-
+        if(!(isAmountValid(amount))) {
+            throw new IllegalArgumentException("Amount: " + amount + " is invalid, cannot deposit");
+        }
+        else {
+            balance += amount;
+        }
     }
 
     public static boolean isEmailValid(String email) {

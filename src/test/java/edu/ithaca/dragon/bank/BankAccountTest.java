@@ -74,6 +74,10 @@ class BankAccountTest {
         bankAccount2.deposit(100);
         assertEquals(200, bankAccount2.getBalance());
 
+        BankAccount bankAccount8 = new BankAccount("a@b.com", 100);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount8.deposit(0));
+        assertEquals(100, bankAccount8.getBalance());
+
         //equivalence class - negative amount (border case)
         BankAccount bankAccount3 = new BankAccount("a@b.com", 100);
         assertThrows(IllegalArgumentException.class, ()-> bankAccount3.deposit(-.01));
