@@ -106,17 +106,19 @@ class BankAccountTest {
 
     @Test
     void transferTest() {
+        //equivalence class - valid amount (middle case)
         BankAccount accFrom1 = new BankAccount("a@b.com", 100);
         BankAccount accTo1 = new BankAccount("a@b.com", 100);
         BankAccount.transfer(100, accFrom1, accTo1);
         assertEquals(0, accFrom1.getBalance());
         assertEquals(200, accTo1.getBalance());
 
+        //equivalence class - valid amount (border case)
         BankAccount accFrom2 = new BankAccount("a@b.com", 100);
         BankAccount accTo2 = new BankAccount("a@b.com", 100);
         BankAccount.transfer(.01, accFrom2, accTo2);
-        assertEquals(0, accFrom2.getBalance());
-        assertEquals(200, accTo2.getBalance());
+        assertEquals(99.99, accFrom2.getBalance());
+        assertEquals(100.01, accTo2.getBalance());
 
         //equivalence class - amount greater than accFrom balance (border case)
         BankAccount accFrom3 = new BankAccount("a@b.com", 100);

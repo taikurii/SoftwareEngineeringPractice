@@ -59,6 +59,23 @@ public class BankAccount {
         }
     }
 
+    /**
+     * @post withdraws amount from accountFrom and deposits it into accountTo if amount is valid (negative or more than two decimal places)
+     * @throws IllegalArgumentException is amount is larger than accountFrom's balance or invalid
+     */
+    public static void transfer(double amount, BankAccount accountFrom, BankAccount accountTo) {
+        if(amount > accountFrom.getBalance()) {
+            throw new IllegalArgumentException("Amount: " + amount + "is larger than accountFrom's balance, cannot transfer");
+        }
+        else if(!(isAmountValid(amount))) {
+            throw new IllegalArgumentException("Amount: " + amount + " is invalid, cannot deposit");
+        }
+        else {
+            accountFrom.withdraw(amount);
+            accountTo.deposit(amount);
+        }
+    }
+
     public static boolean isEmailValid(String email) {
         if (email.indexOf('@') == -1 || email.indexOf('#') != -1 || email.indexOf('!') != -1) {
             return false;
@@ -80,14 +97,6 @@ public class BankAccount {
             }
         }
         return true;
-    }
-
-    /**
-     * @post withdraws amount from accountFrom and deposits it into accountTo if amount is valid (negative or more than two decimal places)
-     * @throws IllegalArgumentException is amount is larger than accountFrom's balance or invalid
-     */
-    public static void transfer(double amount, BankAccount accountFrom, BankAccount accountTo) {
-
     }
 
     /**
