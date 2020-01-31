@@ -40,12 +40,6 @@ class BankAccountTest {
         assertEquals(200, bankAccount5.getBalance());
 
         //equivalence class - valid entry (border case)
-        BankAccount bankAccount6 = new BankAccount("a@b", 200);
-        bankAccount6.withdraw(0);
-        assertEquals(200, bankAccount6.getBalance());
-
-
-        //equivalence class - valid entry (border case)
         BankAccount bankAccount7 = new BankAccount("a@b", 200);
         bankAccount7.withdraw(200);
         assertEquals(0, bankAccount7.getBalance());
@@ -138,6 +132,7 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -1));
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", 1.111));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", 0));
     }
 
 }

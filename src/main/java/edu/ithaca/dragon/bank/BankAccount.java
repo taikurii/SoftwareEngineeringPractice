@@ -6,14 +6,18 @@ public class BankAccount {
     private double balance;
 
     /**
-     * @throws IllegalArgumentException if email is invalid
+     * @throws IllegalArgumentException if email or startingBalance is invalid
      */
     public BankAccount(String email, double startingBalance) {
-        if (isEmailValid(email)) {
+        if (!(isEmailValid(email))) {
+            throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
+        }
+        else if(!(isAmountValid(startingBalance))) {
+            throw new IllegalArgumentException("Starting balance: " + startingBalance + " is invalid, cannot create account");
+        }
+        else {
             this.email = email;
             this.balance = startingBalance;
-        } else {
-            throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
         }
     }
 
@@ -27,11 +31,14 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
-     * @throws IllegalArgumentException if amount is negative or larger than balance
+     * @throws IllegalArgumentException if amount is larger than balance or invalid (negative or more than two decimal places)
      */
     public void withdraw(double amount) {
         if (amount > balance || amount < 0) {
-            throw new IllegalArgumentException("invalid amount, please try again");
+            throw new IllegalArgumentException("Amount: " + amount + " is larger than balance, cannot withdraw");
+        }
+        else if (!(isAmountValid(amount))) {
+            throw new IllegalArgumentException("Amount: " + amount + " is invalid, cannot withdraw");
         }
         else {
             balance -= amount;
@@ -70,7 +77,6 @@ public class BankAccount {
             return false;
         }
         double rounded = java.lang.Math.round(amount*100)/100D;
-        System.out.println(amount + " " + rounded);
         if(rounded == amount) {
          return true;
         }
