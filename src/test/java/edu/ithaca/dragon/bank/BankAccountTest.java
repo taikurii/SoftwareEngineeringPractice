@@ -99,15 +99,17 @@ class BankAccountTest {
     void isAmountValidTest() {
         //equivalence class - valid amount (border case)
         assertTrue(BankAccount.isAmountValid(0.01));
-        //equivalence class - valid amount (not border case)
+        //equivalence class - valid amount (middle case)
         assertTrue(BankAccount.isAmountValid(100));
+        //equivalence class - zero amount
+        assertFalse(BankAccount.isAmountValid(0));
         //equivalence class - negative amount(border case)
         assertFalse(BankAccount.isAmountValid(-.01));
-        //equivalence class - negative amount(not border case)
+        //equivalence class - negative amount(middle case)
         assertFalse(BankAccount.isAmountValid(-100));
         //equivalence class - three or more decimal places (border case)
         assertFalse(BankAccount.isAmountValid(.001));
-        //equivalence class - three or more decimal places (not border case)
+        //equivalence class - three or more decimal places (middle case)
         assertFalse(BankAccount.isAmountValid(.999999));
         //equivalence class - negative amount and three or more decimal places
         assertFalse(BankAccount.isAmountValid(-.001));
